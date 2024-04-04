@@ -1,10 +1,10 @@
-class Menu(private val options: List<String>) {
+class Menu(private val type: String, private val options: List<Any>) {
 
     fun showMenu() {
-
+        println("\nМеню:")
+        println("0. Создать $type")
         for ((index, option) in options.withIndex()) {
-            if (index == 0) println("${index}. Создать $option")
-            else println("${index}. $option")
+            println("${index+1}. $option")
         }
         println("${options.size + 1}. Выход")
 

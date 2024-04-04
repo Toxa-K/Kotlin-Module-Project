@@ -1,6 +1,9 @@
+/*
 class NotesMenu {
 
-    private val menu = Menu(listOf("заметку", "Тут должны быть заметки"))
+    private val notes: MutableList<String> = mutableListOf("Заметки")
+    private val menu: Menu
+        get() = Menu(notes)
 
     fun showNotesMenu() {
         menu.showMenu()
@@ -21,9 +24,18 @@ class NotesMenu {
 
     private fun createNote() {
         // Логика для создания заметки
+        print("Выберите пункт: ")
+        val input = readLine()
+        try {
+            input?.toString() ?: 0
+        } catch (e: NumberFormatException) {
+            0
+        }
+        notes.add(input.toString())
+        showNotesMenu()
     }
 
     private fun displayNoteScreen() {
         // Логика для отображения экрана заметки
     }
-}
+}*/
