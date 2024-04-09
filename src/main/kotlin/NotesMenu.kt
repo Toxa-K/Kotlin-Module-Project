@@ -1,41 +1,57 @@
-/*
-class NotesMenu {
+import kotlin.system.exitProcess
 
-    private val notes: MutableList<String> = mutableListOf("Заметки")
+class NotesMenu(private val notes: MutableMap<String, List<String>>) {
+
+
+
     private val menu: Menu
-        get() = Menu(notes)
+        get() = Menu("заметку", notes.keys.toList())
 
-    fun showNotesMenu() {
-        menu.showMenu()
-        when (menu.getUserChoice()) {
-            1 -> chooseNote()
-            2 -> createNote()
-            3 -> displayNoteScreen()
-            else -> {
-                println("Такого пункта нет. Попробуйте снова.")
-                showNotesMenu()
+
+    fun showNotesMenu(): Any? {
+            var result: Any = 1// Переменная для хранения результата выбора
+        while (result !is String) {
+            val archiveSize = notes.size
+            menu.showMenu()
+
+            result = when (val input = menu.getUserChoice()) {
+                0 -> createNotes()
+                in 1..archiveSize -> {
+                    result = notes.keys.elementAt(input-1)
+                    break
+                }
+                archiveSize + 1 -> {
+                    println("выход")
+                    break
+                }
+                else -> {
+                    println("Такого пункта нет. Попробуйте снова.")
+                    // Продолжаем цикл, чтобы пользователь мог ввести корректное значение
+                }
             }
         }
+        return result // Возвращаем результат
     }
 
-    private fun chooseNote() {
-        // Логика для выбора заметки
-    }
 
-    private fun createNote() {
-        // Логика для создания заметки
-        print("Выберите пункт: ")
+
+    private fun createNotes() {
+        // Логика для создания архива
+        print("Введите название архива: ")
         val input = readLine()
         try {
-            input?.toString() ?: 0
+            input?.let { it.toString() } ?: throw NumberFormatException()
         } catch (e: NumberFormatException) {
-            0
+            println(e)
+            return
         }
-        notes.add(input.toString())
-        showNotesMenu()
+        notes[input.toString()]
     }
 
-    private fun displayNoteScreen() {
-        // Логика для отображения экрана заметки
+
+
+    private fun chooseArchive() {
+        // Логика для выбора архива
+        println("Тут"+notes.size)
     }
-}*/
+}
