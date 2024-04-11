@@ -1,20 +1,26 @@
 fun main() {
     println("Добро пожаловать!")
 
+    //Создание базы данны
+    var notesArchives: MutableMap<String, MutableMap<String, List<String>>> =  mutableMapOf()
 
-    val notesArchives: MutableMap<String, MutableMap<String, List<String>>> =  mutableMapOf()
+
+    //Запуск цикла программы
     while(true){
-        val arch = ArchivesMenu(notesArchives).showArchivesMenu().toString()
-        notesArchives.put(arch)
-        val note = NotesMenu(notesArchives[arch]).showNotesMenu().toString()
-        if (note == "1")
-            break
+        //Запуск меню архива и прием выбранного архива
+        val (updateArchives, title)  = ArchivesMenu(notesArchives).showArchivesMenu()//title -Первый ключ
+        notesArchives = updateArchives
+
+
+        //Запуск меню заметок и прием выбранной заметки
+        var (updateNotes, sprite) = NotesMenu(notesArchives.get(title)).showNotesMenu()//sprite - Второй ключ
+        notesArchives[title] = updateNotes!!
+
+
+
+
 
 
 
     }
-
-
-    /*val archivesMenu = ArchivesMenu(notesArchives)
-      archivesMenu.showArchivesMenu()*/
 }

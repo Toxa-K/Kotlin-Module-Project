@@ -1,26 +1,25 @@
-import kotlin.system.exitProcess
-
-class NotesMenu(private val notes: MutableMap<String, List<String>>) {
+class NotesMenu(val notes: MutableMap<String, List<String>>?) {
 
 
-
+    val text = mutableListOf<String>()
     private val menu: Menu
-        get() = Menu("заметку", notes.keys.toList())
+        get() = Menu("заметку", notes?.keys?.toList()!!)
 
 
-    fun showNotesMenu(): Any? {
-            var result: Any = 1// Переменная для хранения результата выбора
+    fun showNotesMenu(): Pair<MutableMap<String, List<String>>?, String> {
+        var result: Any = 1// Переменная для хранения результата выбора
+        var names: String = ""
         while (result !is String) {
-            val archiveSize = notes.size
+            val notesSize = notes?.size
             menu.showMenu()
 
             result = when (val input = menu.getUserChoice()) {
                 0 -> createNotes()
-                in 1..archiveSize -> {
-                    result = notes.keys.elementAt(input-1)
+                in 1..notesSize!! -> {
+                    names = notes?.keys?.elementAt(input-1) ?:
                     break
                 }
-                archiveSize + 1 -> {
+                notesSize + 1 -> {
                     println("выход")
                     break
                 }
@@ -30,7 +29,7 @@ class NotesMenu(private val notes: MutableMap<String, List<String>>) {
                 }
             }
         }
-        return result // Возвращаем результат
+        return Pair(notes, names) // Возвращаем результат
     }
 
 
@@ -45,13 +44,13 @@ class NotesMenu(private val notes: MutableMap<String, List<String>>) {
             println(e)
             return
         }
-        notes[input.toString()]
+        notes!![input.toString()] = text
     }
 
 
 
     private fun chooseArchive() {
         // Логика для выбора архива
-        println("Тут"+notes.size)
+        println("Тут"+notes?.size)
     }
 }
