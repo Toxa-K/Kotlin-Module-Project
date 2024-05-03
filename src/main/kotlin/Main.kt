@@ -2,37 +2,48 @@ fun main() {
     println("Добро пожаловать!")
     //Создание базы данных
     var notesArchives: MutableMap<String, MutableMap<String, MutableList<String>>> =  mutableMapOf()
-    var flag: Boolean = true
+    var flag = true
 
     //Запуск цикла программы
-    while(flag == true) {
-
+    while(flag) {
         //Запуск меню архива и прием выбранного архива
-        var (updateArchives, fkey, flag) = ArchivesMenu(notesArchives).showArchivesMenu()//fkey -Первый ключ
-        /*val (updateArchives, fkey, flag) = ArchivesMenu(notesArchives as MutableMap<String, MutableMap<String, MutableList<String>>>).showArchivesMenu()*/
+        val (updateArchives, fkey, fi) = ArchivesMenu(notesArchives).showArchivesMenu()
+        print(fkey)
 
-        notesArchives = updateArchives as MutableMap<String, MutableMap<String, MutableList<String>>>//Обновляем архивы
+        //Обновляем архивы
+        notesArchives = updateArchives as MutableMap<String, MutableMap<String, MutableList<String>>>
+
+        flag = fi
+
         if (!flag) break
 
-        var second = notesArchives[fkey]//Выбранный архив
+        //Выбранный архив
+        val second = notesArchives[fkey]
 
-
-        while(flag == true){
+        println(notesArchives)
+        while(flag){
             //Запуск меню заметок и прием выбранной заметки
-            var (updateNotes, skey, flag) = NotesArchivesMenu(second as MutableMap<String, MutableList<String>>).showNotesArchivesMenu()//skey - Второй ключ
-            notesArchives[fkey] = updateNotes as MutableMap<String, MutableList<String>>//обновляем закладки выбранного архива
+            val (updateNotes, skey, fi) = NotesArchivesMenu(second as MutableMap<String, MutableList<String>>).showNotesArchivesMenu()
+            //обновляем закладки выбранного архива
+            notesArchives[fkey] = updateNotes as MutableMap<String, MutableList<String>>
 
-            if (!flag) break
+            println(notesArchives)
+
+            flag = fi
+
+            print(skey)
 
             if(flag){//Запуск меню заметки
-                var newNotes = Notes(notesArchives[fkey]?.get(skey) as MutableList<String>).showNotesMenu()//Меню редактора заметки
-                notesArchives[fkey]?.set(skey, newNotes as MutableList<String>)//внесение измененной\созданной заметки
+                println("tyt2")
+                val newNotes = Notes(notesArchives[fkey]?.get(skey) as MutableList<String>).showNotesMenu()//Меню редактора заметки
+                notesArchives[fkey]?.put(skey, newNotes as MutableList<String>)//внесение измененной\созданной заметки
             }
-
-
         }
-
-
+        flag = true
     }
     println("До свидания!")
 }
+
+
+
+
