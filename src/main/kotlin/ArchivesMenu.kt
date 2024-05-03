@@ -1,5 +1,4 @@
 class ArchivesMenu (var archives: MutableMap<String, MutableMap<String, MutableList<String>>>){
-    private val notes: MutableMap<String, MutableList<String>> =  mutableMapOf()
     fun showArchivesMenu(): Triple<Any, String, Boolean> {
         val menu = Menu()
         return menu.choiceMenu(this, "archives")
@@ -9,9 +8,9 @@ class ArchivesMenu (var archives: MutableMap<String, MutableMap<String, MutableL
         var flag = false
         while(!flag){
             print("Введите название архива: ")
-            var input = readLine()
+            val input = readLine()
             if (!input.equals("")){
-                archives[input.toString()] = notes
+                archives[input.toString()] = mutableMapOf ()
                 flag = true
             }
             else{

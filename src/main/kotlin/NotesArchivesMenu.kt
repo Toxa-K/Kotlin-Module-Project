@@ -1,5 +1,5 @@
 class NotesArchivesMenu(var notes: MutableMap<String, MutableList<String>>) {
-    private val text = mutableListOf<String>()
+
 
     fun showNotesArchivesMenu(): Triple<Any, String, Boolean> {
         val menu = Menu()
@@ -11,10 +11,10 @@ class NotesArchivesMenu(var notes: MutableMap<String, MutableList<String>>) {
         var flag = false
         while(!flag) {
             print("Введите название заметки: ")
-            var input = readLine()
+            val input = readLine()
             if (!input.equals("")){
-                notes[input.toString()] = text
-                flag = true
+                notes[input.toString()] = mutableListOf<String>()
+                    flag = true
             }
             else{
                 println("Поле не может быть пустым")

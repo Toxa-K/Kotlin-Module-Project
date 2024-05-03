@@ -1,5 +1,4 @@
 class Notes(var notes: MutableList<String>) {
-    private val nulltext = mutableListOf<String>()
     private val menu: Menu = Menu()
     fun showNotesMenu():Any{
         while (true) {
@@ -62,7 +61,7 @@ class Notes(var notes: MutableList<String>) {
         createNotes()
     }
     private fun deleteNotes(){
-        notes = nulltext
+        notes = mutableListOf<String>()
     }
 
 }
