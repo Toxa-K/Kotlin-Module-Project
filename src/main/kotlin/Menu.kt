@@ -36,12 +36,10 @@ class Menu(/*private val type: String, private val options: List<Any>*/) {
                     flag= false
                     if (type.equals("notes")) {
                         (clas as NotesArchivesMenu).notes
-                        /*return Triple((clas as NotesArchivesMenu).notes ,names , flag)*/
                         println("Возвращаюсь...")
                     }
                     else {
                         (clas as ArchivesMenu).archives
-                        /*Triple((clas as ArchivesMenu).archives, names, flag)*/
                         println("Выход....")
                     }
                     break
@@ -56,7 +54,6 @@ class Menu(/*private val type: String, private val options: List<Any>*/) {
                 }
             }
         }
-        /*return Pair( ((if (type == "notes") clas.notes else clas.archives), names)*/
         if (type.equals("notes")) return Triple((clas as NotesArchivesMenu).notes, names, flag)
         else return Triple((clas as ArchivesMenu).archives, names, flag)
     }
