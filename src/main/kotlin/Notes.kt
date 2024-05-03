@@ -40,8 +40,20 @@ class Notes(var notes: MutableList<String>) {
         println(notes)
     }
     private fun createNotes(){
-        println("Введите заметку:")
-        notes = listOf(readln()).toMutableList()
+        var flag = false
+        while(!flag){
+            print("Введите заметку:")
+            var input = readLine()
+            if (!input.equals("")){
+                notes = listOf(input) as MutableList<String>
+                flag = true
+            }
+            else{
+                println("Поле не может быть пустым")
+            }
+        }
+
+
     }
     private fun changeNotes(){
         println("Ваша заметка:")

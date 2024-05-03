@@ -6,9 +6,18 @@ class ArchivesMenu (var archives: MutableMap<String, MutableMap<String, MutableL
     }
     fun createArchive() {
         // Логика для создания архива
-        print("Введите название архива: ")
-        val input = readLine()
-        archives[input.toString()] = notes
+        var flag = false
+        while(!flag){
+            print("Введите название архива: ")
+            var input = readLine()
+            if (!input.equals("")){
+                archives[input.toString()] = notes
+                flag = true
+            }
+            else{
+                println("Поле не может быть пустым")
+            }
+        }
     }
 
 }

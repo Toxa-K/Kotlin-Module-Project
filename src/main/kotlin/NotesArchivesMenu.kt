@@ -8,15 +8,18 @@ class NotesArchivesMenu(var notes: MutableMap<String, MutableList<String>>) {
 
     fun createNotesArchives() {
         // Логика для создания архива
-        print("Введите название заметки: ")
-        val input = readLine()
-        try {
-            input?.let { it.toString() } ?: throw NumberFormatException()
-        } catch (e: NumberFormatException) {
-            println(e)
-            return
+        var flag = false
+        while(!flag) {
+            print("Введите название заметки: ")
+            var input = readLine()
+            if (!input.equals("")){
+                notes[input.toString()] = text
+                flag = true
+            }
+            else{
+                println("Поле не может быть пустым")
+            }
         }
-        notes[input.toString()] = text
     }
 
 }
